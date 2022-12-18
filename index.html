@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- 对的，用英文的html -->
+<html lang="en">
+<head>
+    <!-- 这里竟然没有/，不过UTF还是要大写的 -->
+    <meta charset="UTF-8">
+    <!-- 这个meta不加没什么问题 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的博客</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        html {
+            height: 100%;
+        }
+        body{
+            display: flex;
+            min-height: 100%;
+        }
+        #main {
+            order: 1;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            flex-grow: 1;
+            padding-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        section p {
+            line-height: 180%;
+        }
+
+        article {
+            position: relative;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        article a {
+            color: #333;
+        }
+
+        .pubtime {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        footer {
+            text-align: center;
+            line-height: 60px;
+            border-top: solid 1px #ccc;
+        }
+        a {
+            text-decoration: none;
+        }
+        #sidebar {
+            width: 230px;
+            flex-shrink: 0;
+            background-color: #222;
+            color: #999;
+        }
+        #sidebar a {
+            color: #999;
+        }
+        #profile {
+            text-align: center;
+            padding-top: 40px;
+        }
+        #profile h1 {
+            font-size: 1.5rem;
+            font-weight: normal;
+        }
+        #avator img {
+            width: 150px;
+        }
+        #navigator {
+            padding-left: 40px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <!-- 这个是具有语义化的
+        其实最好的是使用for循环
+        你这样一个个写太。。。。 -->
+    <section>
+        <article>
+            <h2>我的第一篇文章</h2>
+            <p>正文摘要要重复很多次</p>
+            <!-- 一些小模块通通用div -->
+            <div class="pubtime">发布时间：<em>2018-12-08</em></div>
+            <div class="readmore"><a href="articles/01.html">阅读全文</a></div>
+        </article>
+        <article>
+            <h2>我的第二篇文章</h2>
+            <p>正文摘要要重复很多次</p>
+            <!-- 一些小模块通通用div -->
+            <div class="pubtime">发布时间：<em>2018-12-08</em></div>
+            <div class="readmore"><a href="articles/01.html">阅读全文</a></div>
+        </article>
+        <article>
+            <h2>我的第三篇文章</h2>
+            <p>正文摘要要重复很多次</p>
+            <!-- 一些小模块通通用div -->
+            <div class="pubtime">发布时间：<em>2018-12-08</em></div>
+            <div class="readmore"><a href="articles/01.html">阅读全文</a></div>
+        </article>
+    </section>
+        <!-- footer还是应该放在主要内容这个板块里 -->
+        <footer>
+            &copy;2018 - 朱绪博客 - 君喻学堂
+        </footer>
+    </div>
+    <div id="sidebar">
+        <div id="profile">
+            <!-- 这个地方值得去标识一下，因为就一处 -->
+            <!-- 因为a不是块级元素，所以得套一个块级元素保护一下 -->
+            <div id="avatar">
+                <a href="about.html">
+                    <img src="static/image/myavatar.png" alt="">
+                </a>
+            </div>
+            <!-- 这里还是挺严谨的 -->
+            <h1>我的博客</h1>
+        </div>
+        <div id="navigator">
+            <!-- a要想做一个有高度有宽度的块，不够格 -->
+            <div><a href="index.html">首页</a></div>
+            <div><a href="friend.html">友链</a></div>
+        </div>
+    </div>
+
+    <script>
+        // 这个dom结点属于对象，用const没毛病
+        // 加s代表了复数
+        const pubtimeEls = document.querySelectorAll('.pubtime em')
+        pubtimeEls.forEach((el) => {
+            // 格式正确才可以塞进去？
+            const date = new Date(el.innerHTML);
+            el.innerHTML = `${date.getMonth() + 1}月${date.getDate()}日，${date.getFullYear()}`;
+        })
+
+        // 基本上要么用const，要么用let
+        // 这其实就是指针，对象的引用
+        let title = document.title
+        window.addEventListener('blur', () => {
+            document.title = '记得回来看我啊~';
+        })
+        window.addEventListener('focus', () => {
+            document.title = title
+        })
+    </script> 
+</body>
+</html>
